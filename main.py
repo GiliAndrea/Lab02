@@ -2,12 +2,11 @@ import translator as tr
 
 t = tr.Translator()
 
-
 while(True):
 
     t.printMenu()
 
-    t.loadDictionary("filename.txt")
+    t.loadDictionary("dictionary.txt")
 
     txtIn = input()
 
@@ -17,8 +16,12 @@ while(True):
         print()
         txtIn = input()
         pass
+
     if int(txtIn) == 2:
-        pass
+        query = input("Ok, quale parola devo cercare?\n\n")
+        print(f"{query}")
+        print(f"{t.handleTranslate(query)}")
+
     if int(txtIn) == 3:
         pass
     if int(txtIn) == 4:
