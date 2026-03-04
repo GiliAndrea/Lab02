@@ -1,7 +1,9 @@
-class Translator:
+import dictionary
 
+
+class Translator:
     def __init__(self):
-        self.dizio = {}
+        self.dizio = dictionary.Dictionary()
 
     def printMenu(self):
         # 1. Aggiungi nuova parola
@@ -23,35 +25,32 @@ class Translator:
         import re
         with open(dict, 'r', encoding="utf-8") as file:
             for riga in file:
-                riga.rstrip("\n")
-                riga.lower()
-                info = riga.split(" ")
-                if re.search(r'[^a-zA-Z]', info[0]) and re.search(r'[^a-zA-Z]', info[1]):
+                riga = riga.rstrip()
+                riga = riga.lower()
+                info = riga.split(" ",1)
+                if re.search(r'[^a-zA-Z]', info[0]) or re.search(r'[^a-zA-Z]', info[1]):
                     ...
                 else:
-                    if info[0] not in self.dizio.keys():
-                        self.dizio[info[0]] = []
-                        self.dizio[info[0]].append(info[1])
-                        tuplaTemp = tuple(self.dizio[info[0]])
-                        self.dizio[info[0]] = list(tuplaTemp)
-                    else:
-                        self.dizio[info[0]].append(info[1])
-                        tuplaTemp = tuple(self.dizio[info[0]])
-                        self.dizio[info[0]] = list(tuplaTemp)
+                    listaTraduzioni = info[1].split(" ")
+                    self.dizio.addWord(info[0], listaTraduzioni)
 
-    def handleAdd(self, entry):
+    def handleAdd(self, entry: tuple):
         # entry is a tuple <parola_aliena> <traduzione1 traduzione2 ...>
-        pass
-
-    def handleTranslate(self, query):
-        # query is a string <parola_aliena>
-        if query in self.dizio.keys():
-            risultato = self.dizio[query]
-            print(risultato)
+        import re
+        pAliena = entry[0]
+        traduzioni = entry[1].split(" ")
+        if re.search(r'[^a-zA-Z]', pAliena) or re.search(r'[^a-zA-Z\s]', entry[1]):
+            print("Parola non aggiunta, non sono state seguite le regole sui caratteri")
         else:
-            print("Non è presente la traduzione")
+            self.dizio.addWord(pAliena, traduzioni)
+            print("Parola aggiunta!")
 
+    def handleTranslate(self, query: str):
+        # query is a string <parola_aliena>
+        risultato = self.dizio.translate(query)
+        return risultato
 
+    # questa la lascio alla fine
     def handleWildCard(self,query):
         # query is a string with a ? --> <par?la_aliena>
         pass

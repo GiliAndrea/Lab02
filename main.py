@@ -1,8 +1,9 @@
-import translator as tr
+import translator
 
-t = tr.Translator()
+t = translator.Translator()
 
-while(True):
+svolgimento = True
+while(svolgimento):
 
     t.printMenu()
 
@@ -13,16 +14,25 @@ while(True):
     # Add input control here!
 
     if int(txtIn) == 1:
-        print()
-        txtIn = input()
-        pass
+        ricerca = input("Ok, quale parola devo aggiungere?\n\n")
+        ricerca = ricerca.lower()
+        elementi = ricerca.split(" ", 1)
+        risultato = (elementi[0], elementi[1])
+        print(list(risultato))
+        t.handleAdd(risultato)
 
     if int(txtIn) == 2:
         query = input("Ok, quale parola devo cercare?\n\n")
         print(f"{query}")
+        query = query.lower()
         print(f"{t.handleTranslate(query)}")
 
+    # la faccio alla fine questa
     if int(txtIn) == 3:
         pass
+
     if int(txtIn) == 4:
-        break
+        t.dizio.stampaTot()
+
+    if int(txtIn) == 5:
+        svolgimento = False
