@@ -50,7 +50,7 @@ class Translator:
         risultato = self.dizio.translate(query)
         return risultato
 
-    # questa la lascio alla fine
-    def handleWildCard(self,query):
+    def handleWildCard(self,query: str):
         # query is a string with a ? --> <par?la_aliena>
-        pass
+        risultato = self.dizio.translateWordWildCard(query)
+        return risultato

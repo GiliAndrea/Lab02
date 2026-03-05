@@ -27,9 +27,11 @@ while(svolgimento):
         query = query.lower()
         print(f"{t.handleTranslate(query)}")
 
-    # la faccio alla fine questa
     if int(txtIn) == 3:
-        pass
+        query = input("Ok, quale parola devo cercare?\n\n")
+        print(f"{query}")
+        query = query.lower()
+        print(f"{t.handleWildCard(query)}")
 
     if int(txtIn) == 4:
         t.dizio.stampaTot()

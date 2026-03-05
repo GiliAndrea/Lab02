@@ -18,9 +18,17 @@ class Dictionary:
             risultato = "Non è presente la traduzione"
             return risultato
 
-    # queto lo lascio alla fine
-    def translateWordWildCard(self):
-        pass
+    def translateWordWildCard(self, query: str):
+        import string
+        risultato = []
+        listaCaratteri = list(string.ascii_lowercase)
+        giolli = query
+        for c in listaCaratteri:
+            giolli = giolli.replace("?", f"{c}")
+            if giolli in self.dizio.keys():
+                risultato = risultato + self.dizio[giolli]
+            giolli = query
+        return risultato
 
     def stampaTot(self):
         for e in self.dizio.keys():
